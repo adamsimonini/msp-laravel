@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component - DERKA DERKA
+                        Inshallah, brother! The fire rises! 
                     </div>
                 </div>
             </div>
