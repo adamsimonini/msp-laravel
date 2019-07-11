@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        // here, one can specify what policy should be checked on what area of the side
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Category' => 'App\Policies\CategoryPolicy'
     ];
 
     /**
