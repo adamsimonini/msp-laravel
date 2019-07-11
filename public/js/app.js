@@ -1858,6 +1858,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'category-manager',
   // initialCategories is passed in as props on 'index.blade.php'
@@ -1865,12 +1867,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       // using Low Dash to make a copy of the categories object, so we don't mutate the base data
-      categories: _.cloneDeep(this.initialCategories)
+      categories: _.cloneDeep(this.initialCategories),
+      feedback: ''
     };
   },
-  created: function created() {
-    axios.post('/api/categories/upsert');
-  },
+  // created() {
+  //     axios.post('/api/categories/upsert');
+  // },
   methods: {
     removeCategory: function removeCategory(index) {
       if (confirm('Are you sure?')) {
@@ -1891,6 +1894,18 @@ __webpack_require__.r(__webpack_exports__);
         window.scrollTo(0, document.body.scrollHeight); // placing 'Entrees' into first [] will continually focus on first part of 'Entrees"
 
         _this.$refs[''][0].focus();
+      });
+    },
+    saveCategories: function saveCategories() {
+      var _this2 = this;
+
+      axios.post('/api/categories/upsert', {
+        categories: this.categories
+      }).then(function (res) {
+        if (res.data.success) {
+          _this2.feedback = "Changes saved.";
+          _this2.categories = res.data.categories;
+        }
       });
     }
   }
@@ -37839,6 +37854,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.saveCategories($event)
+        }
+      }
+    },
     [
       _c("a", { staticClass: "add", on: { click: _vm.addCategory } }, [
         _vm._v("+ Add Category")
@@ -37932,7 +37955,11 @@ var render = function() {
             _c("hr")
           ])
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c("button", { attrs: { type: "submit" } }, [_vm._v("Save")]),
+      _vm._v(" "),
+      _c("div", [_vm._v(_vm._s(_vm.feedback))])
     ],
     2
   )
@@ -50180,14 +50207,15 @@ if (token) {
 /*!*****************************************************!*\
   !*** ./resources/js/components/CategoryManager.vue ***!
   \*****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CategoryManager_vue_vue_type_template_id_d6b20498_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CategoryManager.vue?vue&type=template&id=d6b20498&scoped=true& */ "./resources/js/components/CategoryManager.vue?vue&type=template&id=d6b20498&scoped=true&");
 /* harmony import */ var _CategoryManager_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CategoryManager.vue?vue&type=script&lang=js& */ "./resources/js/components/CategoryManager.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _CategoryManager_vue_vue_type_style_index_0_id_d6b20498_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CategoryManager.vue?vue&type=style&index=0&id=d6b20498&scoped=true&lang=css& */ "./resources/js/components/CategoryManager.vue?vue&type=style&index=0&id=d6b20498&scoped=true&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CategoryManager_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CategoryManager_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _CategoryManager_vue_vue_type_style_index_0_id_d6b20498_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CategoryManager.vue?vue&type=style&index=0&id=d6b20498&scoped=true&lang=css& */ "./resources/js/components/CategoryManager.vue?vue&type=style&index=0&id=d6b20498&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50219,7 +50247,7 @@ component.options.__file = "resources/js/components/CategoryManager.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/CategoryManager.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50281,8 +50309,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\code\msp-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\code\msp-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\code\msp-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\code\msp-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

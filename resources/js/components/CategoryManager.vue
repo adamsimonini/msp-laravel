@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit.prevent='saveCategories'>
         <a @click='addCategory' class='add'>+ Add Category</a>
         <div v-for="(category, index) in categories" v-bind:key="category.id">
             <!-- :ref makes a reference, as described here: https://vuejs.org/v2/api/#ref -->
@@ -15,6 +15,8 @@
                 <hr/>
             </div>
         </div>
+        <button type='submit'>Save</button>
+        <div>{{ feedback }}</div>
     </form>
 </template>
 
@@ -28,11 +30,12 @@ export default {
         return {
             // using Low Dash to make a copy of the categories object, so we don't mutate the base data
             categories: _.cloneDeep(this.initialCategories),
+            feedback: '',
         };
     },
-    created() {
-        axios.post('/api/categories/upsert');
-    },
+    // created() {
+    //     axios.post('/api/categories/upsert');
+    // },
     methods: {
         removeCategory(index) {
             if (confirm('Are you sure?')) {
@@ -51,6 +54,17 @@ export default {
                 window.scrollTo(0, document.body.scrollHeight);
                 // placing 'Entrees' into first [] will continually focus on first part of 'Entrees"
                 this.$refs[''][0].focus();
+            });
+        },
+        saveCategories() {
+            axios.post('/api/categories/upsert', {
+                categories: this.categories
+            })
+            .then((res) => {
+                if (res.data.success) {
+                    this.feedback = "Changes saved.";
+                    this.categories = res.data.categories;
+                }
             });
         }
     },

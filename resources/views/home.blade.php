@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', ' - The best program this side of the hemisphere!')
-
+resources\views\home.blade.php
 @section('content')
 <h4 class="intro">Creating memories, one experience at a time</h4>               
             <p>
@@ -14,7 +14,7 @@
                 @foreach ($categories as $cat)
                     <article>
                         <a href="/menu# {{ str_slug($cat->name) }}"><img src="/images/{{ $cat->image }}"></a>
-                        <h2><a href="/menu# {{ str_slug($cat->name) }}">Starters</a></h2>
+                        <h2><a href="/menu# {{ str_slug($cat->name) }}">{{$cat->name}}</a></h2>
                     </article>  
                 @endforeach                            
             </div>
