@@ -99,6 +99,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // apparenly, I currently have no authorization on deletion
+        // $this->authorize('delete', '$category');
+        $category->delete();
+        return ['success' => true];
     }
 }

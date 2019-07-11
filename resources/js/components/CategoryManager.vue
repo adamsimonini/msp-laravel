@@ -39,6 +39,10 @@ export default {
     methods: {
         removeCategory(index) {
             if (confirm('Are you sure?')) {
+                let id = this.categories[index].id;
+                if (id > 0) {
+                    axios.delete('/api/categories/' + id);
+                }
                 this.categories.splice(index, 1);
             }
         },
