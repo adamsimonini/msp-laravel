@@ -20,6 +20,7 @@
 
 <script>
 export default {
+    
     name: 'category-manager',
     // initialCategories is passed in as props on 'index.blade.php'
     props: ['initialCategories'],
@@ -28,6 +29,9 @@ export default {
             // using Low Dash to make a copy of the categories object, so we don't mutate the base data
             categories: _.cloneDeep(this.initialCategories),
         };
+    },
+    created() {
+        axios.post('/api/categories/upsert');
     },
     methods: {
         removeCategory(index) {
